@@ -5,7 +5,7 @@ import React from "react";
 
 const Header = () => {
   return (
-    <header className="flex justify-between pt-6 px-5">
+    <header className="flex justify-between pt-3 pb-5">
       <Image
         src="/img/logo.png"
         alt="ifoodi"

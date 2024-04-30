@@ -194,7 +194,7 @@ const createBurguers = async (
         data: product,
       });
 
-      console.log(`Created ${product.name}`);
+      (`Created ${product.name}`);
     }
   }
 };
