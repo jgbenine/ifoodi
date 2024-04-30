@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "./ui/button";
 import { MenuIcon } from "lucide-react";
 import Image from "next/image";
 import React from "react";
@@ -13,7 +13,6 @@ const Header = () => {
         width={90}
         sizes="100vw"
       />
-
       <Button
         size="icon"
         variant="outline"
