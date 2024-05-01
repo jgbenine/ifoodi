@@ -3,6 +3,7 @@ import Image from "next/image";
 import React from "react";
 import { formatCurrency, totalPriceCalculator } from "../_helpers/price";
 import { ArrowDownIcon } from "lucide-react";
+import Link from "next/link";
 
 interface PropsProduct {
   product: Prisma.ProductGetPayload<{
@@ -18,7 +19,7 @@ interface PropsProduct {
 
 const CardProduct = ({ product }: PropsProduct) => {
   return (
-    <div className="w-[150px] min-w-[150px] space-y-2">
+    <Link href={`/product/${product.id}`} className="w-[150px] min-w-[150px] space-y-2">
       <div className="relative h-[150px]">
         <Image
           src={product.imageUrl}
@@ -52,7 +53,7 @@ const CardProduct = ({ product }: PropsProduct) => {
           {product.restaurant.name}
         </span>
       </div>
-    </div>
+    </Link>
   );
 };
 
