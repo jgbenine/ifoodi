@@ -8,6 +8,7 @@ import { Button } from "./ui/button";
 import { BikeIcon, MinusIcon, Plus, TimerIcon } from "lucide-react";
 import { Card } from "./ui/card";
 import { ProductsList } from "./Products";
+import { DeliveryInfo } from "./DeliveryInfo";
 
 interface PropsProductDetails {
   product: Prisma.ProductGetPayload<{
@@ -38,7 +39,7 @@ export const ProductDetails = ({
     });
 
   return (
-    <article className="space-y-2 mt-[-1.5rem] pt-4 relative z-50 rounded-tl-2xl rounded-tr-2xl bg-white">
+    <article className="relative z-50 mt-[-1.5rem] space-y-2 rounded-tl-2xl rounded-tr-2xl bg-white pt-4">
       <div className="flex items-center gap-2 px-3">
         <span className="relative h-10 w-10">
           <Image
@@ -90,40 +91,14 @@ export const ProductDetails = ({
             </Button>
           </div>
         </div>
-        <Card className="my-6 flex justify-around py-3 mx-3">
-          <div className="flex flex-col items-center justify-center">
-            <div className="flex items-center gap-1 text-muted-foreground">
-              <BikeIcon size={14} />
-              <p>Entrega</p>
-            </div>
-            <span>
-              {Number(product.restaurant.deliveryPrice) > 0 ? (
-                <p className="text-sm font-semibold">
-                  R${formatCurrency(Number(product.restaurant.deliveryPrice))}
-                </p>
-              ) : (
-                <p className="text-sm font-semibold">Gratis</p>
-              )}
-            </span>
-          </div>
-          <div className="flex flex-col items-center justify-center">
-            <div className="flex items-center gap-1 text-muted-foreground">
-              <TimerIcon size={14} />
-              <p>Entrega</p>
-            </div>
-            <span>
-                <p className="text-sm font-semibold">{product.restaurant.deliveryMinutes}min</p>
-            </span>
-          </div>
-        </Card>
-
-        <div className="mb-3 space-y-3 mx-3">
+        <DeliveryInfo restaurant={product.restaurant} />
+        <div className="mx-3 mb-3 space-y-3">
           <h3 className="font-semibold">Sobre</h3>
           <p className="text-sm text-muted-foreground">{product.description}</p>
         </div>
 
         <div className="mb-3 space-y-3">
-          <h3 className="font-semibold mx-3">Sucos</h3>
+          <h3 className="mx-3 font-semibold">Sucos</h3>
           <ProductsList products={outersProducts} />
         </div>
       </div>
