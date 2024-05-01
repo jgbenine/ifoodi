@@ -19,7 +19,20 @@ const RestaurantPage = async ({ params: { id } }: PropsRestaurant) => {
       id,
     },
     include: {
-      categories: true,
+      categories: {
+        include: {
+          Product: {
+            where: { restaurantId: id },
+            include: {
+              restaurant: {
+                select: {
+                  name: true,
+                },
+              },
+            },
+          },
+        },
+      },
       Product: {
         take: 10,
         include: {
@@ -74,6 +87,13 @@ const RestaurantPage = async ({ params: { id } }: PropsRestaurant) => {
         <h2 className="mb-4 px-2 font-semibold">Mais pedidos</h2>
         <ProductsList products={restaurant.Product} />
       </div>
+
+      {restaurant.categories.map((category) => (
+        <div className="py-4" key={category.id}>
+          <h2 className="mb-4 px-2 font-semibold">{category.name}</h2>
+          <ProductsList products={category.Product} />
+        </div>
+      ))}
     </section>
   );
 };
