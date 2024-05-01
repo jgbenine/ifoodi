@@ -1,5 +1,4 @@
 import React from 'react';
-import { db } from '../_lib/prisma';
 import CardProduct from './CardProduct';
 import { Prisma } from '@prisma/client';
 
@@ -16,7 +15,7 @@ interface PropsProductList {
   }>[];
 }
 
-export const ProductsList = async ({products}: PropsProductList) => {  
+export const ProductsList = ({products}: PropsProductList) => {  
   return (
     <div className="flex gap-2 overflow-x-scroll [&::-webkit-scrollbar]:hidden">
       {products.map((product)=> (

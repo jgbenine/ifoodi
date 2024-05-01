@@ -37,7 +37,7 @@ const ProductPage = async ({ params: { id } }: PropsProduct) => {
   }
 
   return (
-    <section>
+    <section className="bg-white">
       <ImageProduct product={product} />
       <ProductDetails product={product}  outersProducts={juices}/>
     </section>

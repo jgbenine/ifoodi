@@ -49,9 +49,9 @@ const CardProduct = ({ product }: PropsProduct) => {
             </p>
           )}
         </span>
-        <span className="text-muted-foregoround mt-0 text-xs">
+        <p className="text-muted-foregoround mt-0 text-xs">
           {product.restaurant.name}
-        </span>
+        </p>
       </div>
     </Link>
   );

@@ -38,8 +38,8 @@ export const ProductDetails = ({
     });
 
   return (
-    <article className="space-y-2 px-3 py-3">
-      <div className="flex items-center gap-2">
+    <article className="space-y-2 mt-[-1.5rem] pt-4 relative z-50 rounded-tl-2xl rounded-tr-2xl bg-white">
+      <div className="flex items-center gap-2 px-3">
         <span className="relative h-10 w-10">
           <Image
             src={product.restaurant.imageUrl}
@@ -53,7 +53,7 @@ export const ProductDetails = ({
         </p>
       </div>
       <div>
-        <div className="flex justify-between">
+        <div className="flex justify-between px-3">
           <div>
             <h1 className="text-xl font-semibold">{product.name}</h1>
             <div className="flex gap-2">
@@ -68,7 +68,7 @@ export const ProductDetails = ({
               </p>
             )}
           </div>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1 px-3">
             <Button
               className="rounded-full bg-primary shadow-md"
               size="icon"
@@ -90,7 +90,7 @@ export const ProductDetails = ({
             </Button>
           </div>
         </div>
-        <Card className="my-6 flex justify-around py-3">
+        <Card className="my-6 flex justify-around py-3 mx-3">
           <div className="flex flex-col items-center justify-center">
             <div className="flex items-center gap-1 text-muted-foreground">
               <BikeIcon size={14} />
@@ -112,23 +112,18 @@ export const ProductDetails = ({
               <p>Entrega</p>
             </div>
             <span>
-              {Number(product.restaurant.deliveryPrice) > 0 ? (
-                <p className="text-sm font-semibold">
-                  R${formatCurrency(Number(product.restaurant.deliveryPrice))}
-                </p>
-              ) : (
-                <p className="text-sm font-semibold">Gratis</p>
-              )}
+                <p className="text-sm font-semibold">{product.restaurant.deliveryMinutes}min</p>
             </span>
           </div>
         </Card>
 
-        <div className="mb-3 space-y-3">
+        <div className="mb-3 space-y-3 mx-3">
           <h3 className="font-semibold">Sobre</h3>
           <p className="text-sm text-muted-foreground">{product.description}</p>
         </div>
-        <div className="mb-3 space-y-3 mt-4">
-        <h3 className="font-semibold">Sucos</h3>
+
+        <div className="mb-3 space-y-3">
+          <h3 className="font-semibold mx-3">Sucos</h3>
           <ProductsList products={outersProducts} />
         </div>
       </div>
