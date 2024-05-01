@@ -6,7 +6,7 @@ export const Restaurants = async () => {
   const restaurants = await db.restaurant.findMany({take: 10})
 
   return (
-    <div className="flex gap-2 overflow-x-scroll [&::-webkit-scrollbar]:hidden">
+    <div className="flex gap-2 overflow-x-scroll [&::-webkit-scrollbar]:hidden p-2">
     {restaurants.map((restaurants)=> (
       <CardRestaurant key={restaurants.id}  restaurant={restaurants} />
     ))}

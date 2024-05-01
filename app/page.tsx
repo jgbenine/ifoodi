@@ -1,4 +1,3 @@
-
 import Categories from "./components/Categories";
 import Header from "./components/Header";
 import Search from "./components/Search";
@@ -27,14 +26,16 @@ export default async function Home() {
   });
 
   return (
-    <div className="px-5 pt-6">
-      <Header />
-      <Search />
-      <Categories />
-      <BannerPromo src="/img/banner-1.png" alt="Descontos em pizzas" />
-      <div className="py-2">
+    <>
+      <div className="px-2">
+        <Header />
+        <Search />
+        <Categories />
+        <BannerPromo src="/img/banner-1.png" alt="Descontos em pizzas" />
+      </div>
+      <div className="space-y-2 py-2">
         <div className="flex items-center justify-between">
-          <h2>Mais Pedidos</h2>
+          <h2 className="px-2">Mais Pedidos</h2>
           <Button variant="ghost" className="h-fit px-0 hover:bg-transparent">
             Ver todos
             <ChevronRightIcon size={16} />
@@ -42,9 +43,10 @@ export default async function Home() {
         </div>
         <ProductsList products={products} />
       </div>
-      <BannerPromo src="/img/banner-2.png" alt="Descontos em Hamburgers" />
-
+      <div className="px-2">
+        <BannerPromo src="/img/banner-2.png" alt="Descontos em Hamburgers" />
+      </div>
       <Restaurants />
-    </div>
+    </>
   );
 }

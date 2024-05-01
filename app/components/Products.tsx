@@ -17,7 +17,7 @@ interface PropsProductList {
 
 export const ProductsList = ({products}: PropsProductList) => {  
   return (
-    <div className="flex gap-2 px-3 overflow-x-scroll [&::-webkit-scrollbar]:hidden">
+    <div className="flex gap-2 px-2 overflow-x-scroll [&::-webkit-scrollbar]:hidden">
       {products.map((product)=> (
         <CardProduct key={product.id} product={product} />
       ))}

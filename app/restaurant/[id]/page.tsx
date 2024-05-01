@@ -40,7 +40,7 @@ const RestaurantPage = async ({ params: { id } }: PropsRestaurant) => {
   return (
     <section>
       <ImageRestaurant restaurant={restaurant} />
-      <div className="flex w-full items-center justify-between px-3 py-4">
+      <div className="flex w-full items-center justify-between px-2 py-4">
         <div className="flex items-center gap-2">
           <div className="relative h-10 w-10">
             <Image
@@ -71,7 +71,7 @@ const RestaurantPage = async ({ params: { id } }: PropsRestaurant) => {
       </div>
 
       <div className="py-4">
-        <h2 className="mb-4 px-3 font-semibold">Mais pedidos</h2>
+        <h2 className="mb-4 px-2 font-semibold">Mais pedidos</h2>
         <ProductsList products={restaurant.Product} />
       </div>
     </section>

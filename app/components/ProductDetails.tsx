@@ -40,7 +40,7 @@ export const ProductDetails = ({
 
   return (
     <article className="relative z-50 mt-[-1.5rem] space-y-2 rounded-tl-2xl rounded-tr-2xl bg-white pt-4">
-      <div className="flex items-center gap-2 px-3">
+      <div className="flex items-center gap-2 px-2">
         <span className="relative h-10 w-10">
           <Image
             src={product.restaurant.imageUrl}
@@ -54,7 +54,7 @@ export const ProductDetails = ({
         </p>
       </div>
       <div>
-        <div className="flex justify-between px-3">
+        <div className="flex justify-between px-2">
           <div>
             <h1 className="text-xl font-semibold">{product.name}</h1>
             <div className="flex gap-2">
@@ -69,7 +69,7 @@ export const ProductDetails = ({
               </p>
             )}
           </div>
-          <div className="flex items-center gap-1 px-3">
+          <div className="flex items-center gap-1 px-2">
             <Button
               className="rounded-full bg-primary shadow-md"
               size="icon"
