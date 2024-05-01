@@ -28,8 +28,8 @@ const CardProduct = ({ product }: PropsProduct) => {
         />
         {product.discount && (
           <div className="absolute right-2 top-2 flex  items-center rounded-full bg-primary px-2 py-[2px]">
-            <span className="flex items-center gap-0.5 text-sm font-semibold">
-              <ArrowDownIcon size={12} />
+            <span className="flex items-center gap-0.5 text-sm font-semibold text-white">
+              <ArrowDownIcon size={12} className="fill-white text-white" />
               {product.discount}%
             </span>
           </div>
