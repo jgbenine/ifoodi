@@ -1,7 +1,6 @@
 import { db } from "@/app/_lib/prisma";
 import CardRestaurant from "@/app/components/CardRestaurant";
 import Header from "@/app/components/Header";
-import Search from "@/app/components/Search";
 import React from "react";
 
 const RestaurantsRecommended = async () => {

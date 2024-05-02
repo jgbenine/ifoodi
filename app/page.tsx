@@ -1,12 +1,12 @@
-import Categories from "./components/Categories";
-import Header from "./components/Header";
-import Search from "./components/Search";
 import { ProductsList } from "./components/Products";
 import { ChevronRightIcon } from "lucide-react";
 import { Button } from "./components/ui/button";
 import { db } from "./_lib/prisma";
 import { BannerPromo } from "./components/BannerPromo";
 import { Restaurants } from "./components/Restaurants";
+import Categories from "./components/Categories";
+import Header from "./components/Header";
+import Search from "./components/Search";
 import Link from "next/link";
 
 export default async function Home() {
@@ -28,38 +28,47 @@ export default async function Home() {
 
   return (
     <>
-      <div className="px-2">
+      <div className="px-3">
         <Header />
-        <Search />
+        <div className="pt-4">
+          <Search />
+        </div>
         <Categories />
         <BannerPromo src="/img/banner-1.png" alt="Descontos em pizzas" />
       </div>
-      <div className="space-y-2 py-2">
+      <div className="space-y-2 py-3">
         <div className="flex items-center justify-between">
-          <h2 className="px-2">Mais Pedidos</h2>
-          <Button variant="ghost" className="h-fit px-0 hover:bg-transparent">
-            Ver todos
-            <ChevronRightIcon size={16} />
+          <h2 className="px-3">Mais Pedidos</h2>
+          <Button
+            variant="ghost"
+            className="h-fit px-3 hover:bg-transparent"
+            asChild
+          >
+            <Link href="/product/recommended">
+              Ver todos
+              <ChevronRightIcon size={16} />
+            </Link>
           </Button>
         </div>
         <ProductsList products={products} />
       </div>
-      <div className="px-2">
+      <div className="p-3">
         <BannerPromo src="/img/banner-2.png" alt="Descontos em Hamburgers" />
       </div>
-
-      <div className="py-2">
-        <div className="flex items-center justify-between">
-          <h2 className="px-2">Restaurantes</h2>
+      <div className="flex items-center justify-between">
+        <h2 className="px-3">Restaurantes</h2>
+        <Button
+          variant="ghost"
+          className="h-fit px-3 hover:bg-transparent"
+          asChild
+        >
           <Link href="/restaurant/recommended">
-            <Button variant="ghost" className="h-fit px-0 hover:bg-transparent">
-              Ver todos
-              <ChevronRightIcon size={16} />
-            </Button>
+            Ver todos
+            <ChevronRightIcon size={16} />
           </Link>
-        </div>
-        <Restaurants />
+        </Button>
       </div>
+      <Restaurants />
     </>
   );
 }

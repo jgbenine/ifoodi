@@ -10,7 +10,7 @@ interface PropsDelivery {
 
 export const DeliveryInfo = ({restaurant}: PropsDelivery) => {
   return (
-    <Card className="my-6 flex justify-around py-3 mx-3">
+    <Card className="my-6 flex justify-around py-3 mx-2">
     <div className="flex flex-col items-center justify-center">
       <div className="flex items-center gap-1 text-muted-foreground">
         <BikeIcon size={14} />
