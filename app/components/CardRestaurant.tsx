@@ -11,7 +11,7 @@ interface PropsCardRestaurant {
 
 export const CardRestaurant = ({ restaurant }: PropsCardRestaurant) => {
   return (
-    <Link href={`/restaurant/${restaurant.id}`} className="relative min-w-[266px] space-y-1 py-2">
+    <Link href={`/restaurants/${restaurant.id}`} className="relative min-w-[266px] space-y-1 py-2">
       <div className="relative h-[136px] w-full">
         <Image
           src={restaurant.imageUrl}

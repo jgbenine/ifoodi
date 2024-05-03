@@ -62,7 +62,7 @@ export default async function Home() {
           className="h-fit px-3 hover:bg-transparent"
           asChild
         >
-          <Link href="/restaurant/recommended">
+          <Link href="/restaurants/recommended">
             Ver todos
             <ChevronRightIcon size={16} />
           </Link>

@@ -1,6 +1,7 @@
+'use client'
 import { Restaurant } from "@prisma/client";
 import { notFound, useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { searchForRestaurants } from "./_actions/search";
 import Header from "../components/Header";
 import CardRestaurant from "../components/CardRestaurant";
