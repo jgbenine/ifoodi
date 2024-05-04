@@ -1,13 +1,23 @@
 'use client'
-import { Product } from "@prisma/client";
-import { ReactNode, createContext, useState } from "react";
+import { Prisma, Product } from "@prisma/client";
+import { ReactNode, createContext, useMemo, useState } from "react";
+import { totalPriceCalculator } from "../_helpers/price";
 
-export interface CartProduct extends Product {
+export interface CartProduct extends Prisma.ProductGetPayload<{include: {
+  restaurant: {
+    select: {
+      deliveryPrice: true;
+    };
+  };
+}}> {
   quantity: number;
 }
 
 interface PropsCartContext{
   products: CartProduct[];
+  subTotalPrice: number;
+  totalPrice: number;
+  totalDiscounts: number;
   addProductToCart: (product: Product, quantity: number) => void;
   decreaseQuantityProductCart: (productId: string) => void;
   removeProductFromCart: (productId: string) => void;
@@ -16,14 +26,33 @@ interface PropsCartContext{
 
 export const CartContext = createContext<PropsCartContext>({
   products: [],
+  subTotalPrice: 0,
+  totalPrice: 0,
+  totalDiscounts: 0,
   addProductToCart: () => {},
   decreaseQuantityProductCart: () => {},
   removeProductFromCart: () => {},
-  increaseQuantityProductCart: () => {}
+  increaseQuantityProductCart: () => {},
 });
 
 export const CartProvider = ({children}: {children: ReactNode}) =>{
-   const [products, setProducts]= useState<CartProduct[]>([])
+   const [products, setProducts]= useState<CartProduct[]>([]);
+
+   const subTotalPrice = useMemo<number>(()=>{
+     return products.reduce((acc, product) => {
+      return acc + Number(product.price) * product.quantity;
+     }, 0)
+   }, [products])
+
+   const totalPrice = useMemo<number>(()=>{
+     return products.reduce((acc, product) => {
+      return acc + totalPriceCalculator(product) * product.quantity;
+     }, 0)
+   }, [products])
+
+
+   const totalDiscounts = totalPrice - subTotalPrice;
+
 
    function decreaseQuantityProductCart(productId: string){
     setProducts((prevProducts) => {
@@ -87,7 +116,7 @@ export const CartProvider = ({children}: {children: ReactNode}) =>{
 
 
   return (
-    <CartContext.Provider value={{products, addProductToCart, removeProductFromCart, decreaseQuantityProductCart, increaseQuantityProductCart}}>
+    <CartContext.Provider value={{products, addProductToCart, removeProductFromCart, decreaseQuantityProductCart, increaseQuantityProductCart, totalDiscounts, totalPrice, subTotalPrice}}>
       {children}
     </CartContext.Provider>
   )

@@ -30,11 +30,11 @@ const CartProduct = ({ cartProduct }: PropsCartProduct) => {
           <h3 className="text-xs">{cartProduct.name}</h3>
           <span className="flex items-center gap-1">
             <h4 className="text-sm font-bold">
-              R${formatCurrency(totalPriceCalculator(cartProduct))}
+              R${formatCurrency(totalPriceCalculator(cartProduct) * cartProduct.quantity)}
             </h4>
             {cartProduct.discount > 0 && (
               <p className="text-xs text-muted-foreground line-through">
-                {formatCurrency(Number(cartProduct.price))}
+                {formatCurrency(Number(cartProduct.price) * cartProduct.quantity)}
               </p>
             )}
           </span>
