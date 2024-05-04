@@ -1,15 +1,20 @@
-import React from "react";
-import { CartProduct } from "../_contextData/Cart";
+import React, { useContext } from "react";
+import {
+  CartContext,
+  CartProduct,
+} from "../_contextData/Cart";
 import Image from "next/image";
 import { formatCurrency, totalPriceCalculator } from "../_helpers/price";
 import { Button } from "./ui/button";
-import { MinusIcon, Plus } from "lucide-react";
+import { MinusIcon, Plus, TrashIcon } from "lucide-react";
 
 export interface PropsCartProduct {
   cartProduct: CartProduct;
 }
 
 const CartProduct = ({ cartProduct }: PropsCartProduct) => {
+  const { decreaseQuantityProductCart, removeProductFromCart, increaseQuantityProductCart, } = useContext(CartContext);
+
   return (
     <div className="flex items-center justify-between">
       <div className="flex gap-4 ">
@@ -35,9 +40,10 @@ const CartProduct = ({ cartProduct }: PropsCartProduct) => {
           </span>
           <div className="flex items-center gap-0.5">
             <Button
-              className="rounded-full bg-primary shadow-md h-8 w-8"
+              className="h-8 w-8 rounded-full bg-primary shadow-md"
               size="icon"
               variant="ghost"
+              onClick={() => decreaseQuantityProductCart(cartProduct.id)}
             >
               <MinusIcon size={16} />
             </Button>
@@ -47,13 +53,17 @@ const CartProduct = ({ cartProduct }: PropsCartProduct) => {
             <Button
               size="icon"
               variant="ghost"
-              className="rounded-full border border-gray-100 shadow-md h-8 w-8 focus:border-0"
+              className="h-8 w-8 rounded-full border border-gray-100 shadow-md focus:border-0"
+              onClick={() => increaseQuantityProductCart(cartProduct.id)}
             >
               <Plus size={16} />
             </Button>
           </div>
         </article>
       </div>
+      <Button onClick={() => removeProductFromCart(cartProduct.id)}>
+        <TrashIcon size={16} />
+      </Button>
     </div>
   );
 };

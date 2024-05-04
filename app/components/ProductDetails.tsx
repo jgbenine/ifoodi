@@ -44,7 +44,7 @@ export const ProductDetails = ({
   const { addProductToCart, products } = useContext(CartContext);
 
   const handleAddProductClick = () => {
-    addProductToCart(product);
+    addProductToCart(product, quantidade);
     setIsCartOpen(true);
   };
 
