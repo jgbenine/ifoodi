@@ -18,7 +18,13 @@ interface PropsCartContext{
   subTotalPrice: number;
   totalPrice: number;
   totalDiscounts: number;
-  addProductToCart: (product: Product, quantity: number) => void;
+  addProductToCart: (product: Prisma.ProductGetPayload<{include: {
+    restaurant: {
+      select: {
+        deliveryPrice: true;
+      };
+    };
+   }}>, quantity: number) => void;
   decreaseQuantityProductCart: (productId: string) => void;
   removeProductFromCart: (productId: string) => void;
   increaseQuantityProductCart: (productId: string) => void;
@@ -47,12 +53,11 @@ export const CartProvider = ({children}: {children: ReactNode}) =>{
    const totalPrice = useMemo<number>(()=>{
      return products.reduce((acc, product) => {
       return acc + totalPriceCalculator(product) * product.quantity;
-     }, 0)
+     }, 0) + Number(products[0]?.restaurant?.deliveryPrice)
    }, [products])
 
-
-   const totalDiscounts = totalPrice - subTotalPrice;
-
+   //Total dos descontos
+   const totalDiscounts = totalPrice - subTotalPrice  + Number(products[0]?.restaurant?.deliveryPrice); 
 
    function decreaseQuantityProductCart(productId: string){
     setProducts((prevProducts) => {
@@ -86,29 +91,46 @@ export const CartProvider = ({children}: {children: ReactNode}) =>{
     });
   };
 
-  function removeProductFromCart(productId: string){
+  function removeProductFromCart(productId: string) {
     setProducts((prevProducts) => {
       if (!prevProducts) {
         console.log("Carrinho vazio");
         return [];
       }
-      return prevProducts.filter((product) =>{product.id !== productId});
+      // Filtrando todos os produtos menos o com id selecionado
+      return prevProducts.filter((product) => product.id !== productId);
     });
-   }
+  }
 
-   function addProductToCart(product: Product, quantity: number){
+   function addProductToCart(product: Prisma.ProductGetPayload<{include: {
+    restaurant: {
+      select: {
+        deliveryPrice: true;
+      };
+    };
+   }}>, quantity: number){
+    const hasDifferentRestaurantProduct = products.some(
+      (selectedProducted) =>
+        selectedProducted.restaurantId !== product.restaurantId,
+    );
+
+    if(hasDifferentRestaurantProduct){
+      setProducts([]);
+    }
+
+
+
+    //Verificando se produto esta no carrinho
     const isProductAlreadyAdded = products.some(p => p.id === product.id);
-  
     setProducts((prevProducts) => {
       if (isProductAlreadyAdded) {
-        // Update quantity for existing product
+   
         return prevProducts.map((cartProduct) =>
           cartProduct.id === product.id
             ? { ...cartProduct, quantity: cartProduct.quantity + quantity }
             : cartProduct
         );
       } else {
-        // Add new product to cart
         return [...prevProducts, { ...product, quantity }];
       }
     });

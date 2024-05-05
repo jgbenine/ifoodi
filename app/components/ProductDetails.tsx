@@ -11,6 +11,7 @@ import {
   MinusIcon,
   Plus,
   ShoppingBag,
+  ShoppingBasket,
   ShoppingCartIcon,
   TimerIcon,
 } from "lucide-react";
@@ -20,6 +21,22 @@ import { DeliveryInfo } from "./DeliveryInfo";
 import { CartContext } from "../_contextData/Cart";
 import { Sheet, SheetContent, SheetTitle } from "./ui/sheet";
 import { CartModal } from "./CartModal";
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogCancel,
+  AlertDialogDescription,
+  AlertDialogTitle,
+  AlertDialogAction,
+} from "./ui/alert-dialog";
+// import {
+//   AlertDialogAction,
+//   AlertDialogCancel,
+//   AlertDialogDescription,
+//   AlertDialogTitle,
+// } from "@radix-ui/react-alert-dialog";
 
 interface PropsProductDetails {
   product: Prisma.ProductGetPayload<{
@@ -39,13 +56,25 @@ export const ProductDetails = ({
   outersProducts,
 }: PropsProductDetails) => {
   const [quantidade, setQuantidade] = useState(1);
-
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [modalDialog, setModalDialog] = useState(false);
   const { addProductToCart, products } = useContext(CartContext);
 
-  const handleAddProductClick = () => {
+  function addToCart() {
     addProductToCart(product, quantidade);
     setIsCartOpen(true);
+  }
+
+  const handleAddProductClick = () => {
+    const hasDifferentRestaurantProduct = products.some(
+      (selectedProducted) =>
+        selectedProducted.restaurantId !== product.restaurantId,
+    );
+
+    if (hasDifferentRestaurantProduct) {
+      return setModalDialog(true);
+    }
+    addToCart();
   };
 
   const handleAddQuantidade = () =>
@@ -136,10 +165,38 @@ export const ProductDetails = ({
         </>
         <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>
           <SheetContent>
-            <SheetTitle>Sacola</SheetTitle>
+            <SheetTitle className="flex items-center gap-2">
+              Sacola
+              <ShoppingBag size={20} />
+            </SheetTitle>
             <CartModal />
           </SheetContent>
         </Sheet>
+
+        <AlertDialog open={modalDialog} onOpenChange={setModalDialog}>
+          <AlertDialogContent className="m-2 max-w-[350px] rounded-sm">
+            <AlertDialogHeader>
+              <AlertDialogTitle className="text-2xl font-semibold">
+                Deseja limpar sacola?
+              </AlertDialogTitle>
+              <AlertDialogDescription>
+                Tem certeza que deseja limpar sacola e adicionar um novo
+                produto?
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter className="flex w-full flex-row justify-center gap-4">
+              <AlertDialogAction
+                className="rounded-md border border-zinc-200"
+                onClick={addToCart}
+              >
+                Confirmar
+              </AlertDialogAction>
+              <AlertDialogCancel className="mt-0 border-0 bg-slate-400 text-white">
+                Cancelar
+              </AlertDialogCancel>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </>
     </article>
   );
