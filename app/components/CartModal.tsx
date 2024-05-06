@@ -5,7 +5,7 @@ import { Card, CardContent } from "./ui/card";
 import { formatCurrency } from "../_helpers/price";
 import { Separator } from "./ui/separator";
 import { Button } from "./ui/button";
-import { DeliveryInfo } from "./DeliveryInfo";
+// import { DeliveryInfo } from "./DeliveryInfo";
 import { createOrder } from "../_actions/order";
 import { OrderStatus } from "@prisma/client";
 import { useSession } from "next-auth/react";
