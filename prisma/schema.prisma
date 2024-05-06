@@ -21,6 +21,7 @@ model Restaurant {
   deliveryMinutes Int
   categories      Category[]
   Product         Product[]
+  Order           Order[]
 }
 
 model Category {
@@ -42,6 +43,32 @@ model Product {
   restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
   categoryId   String
   category     Category   @relation(fields: [categoryId], references: [id])
+  Order        Order?     @relation(fields: [orderId], references: [id])
+  orderId      String?
+  createdAt    DateTime   @default(now())
+}
+
+model Order {
+  id            String      @id @default(uuid())
+  userId        String
+  user          User        @relation(fields: [userId], references: [id])
+  products      Product[]
+  restaurants   Restaurant  @relation(fields: [restaurantId], references: [id])
+  deliveryPrice Decimal     @db.Decimal(10, 2)
+  totalPrice    Decimal     @db.Decimal(10, 2)
+  subTotalPrice Decimal     @db.Decimal(10, 2)
+  totalDiscount Decimal     @db.Decimal(10, 2)
+  deliveryTime  Int
+  createdAt     DateTime    @default(now())
+  restaurantId  String
+  status        OrderStatus
+}
+
+enum OrderStatus {
+  CONFIRED
+  PREPARING
+  DELIVERING
+  FINISHED
 }
 
 //Auth User
@@ -58,8 +85,7 @@ model Account {
   scope             String?
   id_token          String? @db.Text
   session_state     String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
   @@map("accounts")
@@ -83,6 +109,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  Order         Order[]
 
   @@map("users")
 }
