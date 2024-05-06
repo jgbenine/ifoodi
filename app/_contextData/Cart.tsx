@@ -6,7 +6,9 @@ import { totalPriceCalculator } from "../_helpers/price";
 export interface CartProduct extends Prisma.ProductGetPayload<{include: {
   restaurant: {
     select: {
+      id: true,
       deliveryPrice: true;
+      deliveryMinutes: true,
     };
   };
 }}> {
@@ -22,13 +24,16 @@ interface PropsCartContext{
   addProductToCart: (product: Prisma.ProductGetPayload<{include: {
     restaurant: {
       select: {
+        id: true,
         deliveryPrice: true;
+        deliveryMinutes: true,
       };
     };
-   }}>, quantity: number) => void;
+  }}>, quantity: number) => void;
   decreaseQuantityProductCart: (productId: string) => void;
   removeProductFromCart: (productId: string) => void;
   increaseQuantityProductCart: (productId: string) => void;
+  clearCart: (productId: string) => void; 
 }
 
 export const CartContext = createContext<PropsCartContext>({
@@ -41,6 +46,7 @@ export const CartContext = createContext<PropsCartContext>({
   decreaseQuantityProductCart: () => {},
   removeProductFromCart: () => {},
   increaseQuantityProductCart: () => {},
+  clearCart: () => {},
 });
 
 export const CartProvider = ({children}: {children: ReactNode}) =>{
@@ -144,8 +150,12 @@ export const CartProvider = ({children}: {children: ReactNode}) =>{
     });
   };
 
+  function clearCart() {
+    return setProducts([]);
+  }
+
   return (
-    <CartContext.Provider value={{products, addProductToCart, removeProductFromCart, decreaseQuantityProductCart, increaseQuantityProductCart, totalDiscounts, totalPrice, subTotalPrice, totalQuantityProductsInCart}}>
+    <CartContext.Provider value={{products, addProductToCart, removeProductFromCart, decreaseQuantityProductCart, increaseQuantityProductCart, totalDiscounts, totalPrice, subTotalPrice, totalQuantityProductsInCart, clearCart}}>
       {children}
     </CartContext.Provider>
   )

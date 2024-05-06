@@ -14,7 +14,7 @@ export interface PropsCartProduct {
 
 const CartProduct = ({ cartProduct }: PropsCartProduct) => {
   const { decreaseQuantityProductCart, removeProductFromCart, increaseQuantityProductCart, } = useContext(CartContext);
-
+  
   return (
     <div className="flex items-center justify-between">
       <div className="flex gap-4 ">
