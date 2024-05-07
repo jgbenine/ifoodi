@@ -40,7 +40,7 @@ const Header = () => {
       </Link>
 
       <Sheet>
-        <SheetTrigger>
+        <SheetTrigger asChild>
           <Button
             size="icon"
             variant="outline"
@@ -97,9 +97,12 @@ const Header = () => {
                   <Button
                     variant="ghost"
                     className="flex w-full items-center justify-start gap-4 rounded-full px-2"
+                    asChild
                   >
-                    <ScrollTextIcon size={22} />
-                    <p>Meus Pedidos</p>
+                    <Link href="/my-orders">
+                      <ScrollTextIcon size={22} />
+                      <p>Meus Pedidos</p>
+                    </Link>
                   </Button>
                   <Button
                     variant="ghost"

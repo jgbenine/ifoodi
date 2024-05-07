@@ -57,7 +57,7 @@ export const ProductDetails = ({
 }: PropsProductDetails) => {
   const [quantidade, setQuantidade] = useState(1);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [modalDialog, setModalDialog] = useState(false);
+  const [modalDialog, setModalDialog] = useState(false);  
   const { addProductToCart, products } = useContext(CartContext);
 
   function addToCart() {
