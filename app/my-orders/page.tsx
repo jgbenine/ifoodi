@@ -23,25 +23,22 @@ const MyOrders = async () => {
         include: {
           product: true,
         },
-      }
+      },
     },
   });
 
-  console.log(orders);
-
   return (
-    <div>
+    <section className="px-3">
       <Header />
-      <div className="py-6">
+      <div className="py-6 flex flex-col gap-2">
         <h2 className="font-semibold">Meus pedidos</h2>
         {orders.map((order) => (
           <div className="space-y-3" key={order.id}>
             <OrderItem order={order} />
           </div>
         ))}
-        <></>
       </div>
-    </div>
+    </section>
   );
 };
 

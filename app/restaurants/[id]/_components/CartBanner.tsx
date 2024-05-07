@@ -26,7 +26,8 @@ export const CartBanner = ({ restaurant }: PropsCartsBanner) => {
       return restaurant.id === product.restaurantId;
     }
   });
-  console.log({ restaurantHasProductOnCart });
+
+  
   if (!restaurantHasProductOnCart) return null;
 
   return (

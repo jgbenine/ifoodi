@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import {
   CartContext,
-  CartProduct,
+  ProductItem,
 } from "../_contextData/Cart";
 import Image from "next/image";
 import { formatCurrency, totalPriceCalculator } from "../_helpers/price";
@@ -9,7 +9,7 @@ import { Button } from "./ui/button";
 import { MinusIcon, Plus, TrashIcon } from "lucide-react";
 
 export interface PropsCartProduct {
-  cartProduct: CartProduct;
+  cartProduct: ProductItem;
 }
 
 const CartProduct = ({ cartProduct }: PropsCartProduct) => {
