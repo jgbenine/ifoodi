@@ -51,6 +51,14 @@ export const CartModal = () => {
             id: data.user.id,
           },
         },
+        products: {
+          createMany: {
+            data: products.map((product) => ({
+              productId: product.id,
+              quantity: product.quantity,
+            })),
+          },
+        },
       });
       clearCart();
     } catch (error) {
@@ -103,7 +111,8 @@ export const CartModal = () => {
                 onClick={() => {
                   setConfirmDialog(true);
                 }}
-                disabled={isLoading}>
+                disabled={isLoading}
+              >
                 <p>Finalizar Pedido</p>
               </Button>
             </CardContent>
