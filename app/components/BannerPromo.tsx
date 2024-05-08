@@ -1,7 +1,11 @@
-import Image, { ImageProps } from "next/image";
-import React from "react";
+import Image from "next/image";
 
-export const BannerPromo = ({props, alt}: any) => {
+interface PropsBannerPromo  {
+  alt: string;
+  src: string;
+}
+
+export const BannerPromo = ({alt, src}: PropsBannerPromo) => {
   return (
     <span>
       <Image
@@ -10,9 +14,10 @@ export const BannerPromo = ({props, alt}: any) => {
         sizes="100vw"
         className="h-auto w-full"
         quality={100}
-        alt={alt || ""}
-        {...props}
+        alt={alt}
+        src={src}
       />
+      
     </span>
   );
 };

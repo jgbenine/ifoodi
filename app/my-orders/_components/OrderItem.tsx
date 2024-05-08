@@ -41,21 +41,21 @@ const OrderItem = ({ order }: OrderItemProps) => {
     <Card>
       <CardContent className="py-5">
         <div className="rounded-full text-muted-foreground">
-          <span className={`rounded-full bg-muted py-2 px-4 text-xs font-semibold ${order.status !== 'FINISHED' && "bg-green-500 text-white"}`}>
+          <span className={`rounded-full bg-muted py-1 px-4 text-xs font-semibold text-gray-500 ${order.status !== 'FINISHED' && "bg-green-500 text-white"}`}>
             {getOrderStatusLabel(order.status)}
           </span>
         </div>
 
         <article className="my-2 flex items-center justify-between gap-2">
           <div className="flex w-full items-center justify-between">
-            <span className="flex gap-2">
-              <Avatar className="h-6 w-6">
+            <span className="flex gap-2 items-center">
+              <Avatar className="h-10 w-10">
                 <AvatarImage src={order.restaurant?.imageUrl} />
               </Avatar>
               <p className="font-semibold">{order.restaurant?.name}</p>
             </span>
-            <Link href={`/restaurants/${order.restaurantId}`} className="h-5 w-5 py-4" >
-              <ChevronRight />
+            <Link href={`/restaurants/${order.restaurantId}`} className="h-5 w-5 py-2 border flex items-center justify-center rounded-full shadow-md" >
+              <ChevronRight size={15} />
             </Link>
           </div>
         </article>
