@@ -10,7 +10,7 @@ import Link from "next/link";
 
 
 interface PropsCardRestaurant {
-  userId: string;
+  userId?: string;
   restaurant: Restaurant;
 }
 
@@ -20,11 +20,9 @@ export const CardRestaurant = ({ restaurant, userId }: PropsCardRestaurant) => {
     if (!userId) return;
     try {
       await favoritesRestaurants(userId, restaurant.id);
-
       toast({
         title: 'Restaurante adicionado aos favoritos',
       })
-      console.log('exec')
     } catch (err) {
       console.log(err);
     }

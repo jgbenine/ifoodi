@@ -1,7 +1,8 @@
 "use server"
 import { db } from "../_lib/prisma"
 
-export const favoritesRestaurants = (restaurantId: string, userId: string) => {
+export const favoritesRestaurants = (userId: string, restaurantId: string, ) => {
+  console.log(userId);
   return db.userFavoriteRestaurants.create({
     data: {
       userId,

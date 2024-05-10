@@ -8,6 +8,8 @@ export const Restaurants = async () => {
   const session = await getServerSession(authOptions)
   const restaurants = await db.restaurant.findMany({take: 10})
 
+  console.log(session?.user?.id);
+
   return (
     <div className="flex gap-2 overflow-x-scroll [&::-webkit-scrollbar]:hidden px-3">
     {restaurants.map((restaurants)=> (
