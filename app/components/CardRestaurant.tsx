@@ -1,30 +1,39 @@
 "use client";
-import { Restaurant } from "@prisma/client";
+import { Restaurant, UserFavoriteRestaurants } from "@prisma/client";
 import { BikeIcon, HeartIcon, StarIcon, TimerIcon } from "lucide-react";
 import { formatCurrency } from "../_helpers/price";
-import { favoritesRestaurants } from "../_actions/restaurants";
+import { toggleUserFavoriteRestaurants } from "../_actions/restaurants";
 import { Button } from "./ui/button";
-import { useToast } from "./ui/use-toast";
+import { toast } from "sonner";
 import Image from "next/image";
 import Link from "next/link";
-
 
 interface PropsCardRestaurant {
   userId?: string;
   restaurant: Restaurant;
+  userFavoritesRestaurants: UserFavoriteRestaurants[];
 }
 
-export const CardRestaurant = ({ restaurant, userId }: PropsCardRestaurant) => {
-  const { toast } = useToast()
+export const CardRestaurant = ({
+  restaurant,
+  userId,
+  userFavoritesRestaurants,
+}: PropsCardRestaurant) => {
+  const isFavorites = userFavoritesRestaurants.some(
+    (favorites) => favorites.restaurantId === restaurant.id,
+  );
+
   const handleFavoritesRestaurant = async () => {
     if (!userId) return;
     try {
-      await favoritesRestaurants(userId, restaurant.id);
-      toast({
-        title: 'Restaurante adicionado aos favoritos',
-      })
+      await toggleUserFavoriteRestaurants(userId, restaurant.id);
+      toast.success(
+        isFavorites
+          ? "Restaurants adicionado favoritado"
+          : "Restaurants removido dos favoritos",
+      );
     } catch (err) {
-      console.log(err);
+      toast.error("Você já registrou esse restaurante!");
     }
   };
 
@@ -46,10 +55,13 @@ export const CardRestaurant = ({ restaurant, userId }: PropsCardRestaurant) => {
           </span>
           {userId && (
             <Button
-              className="hover:color-white flex h-[28px] items-center gap-1 rounded-full bg-white px-2 text-xs font-bold"
+              className={`flex h-[28px] items-center gap-1 rounded-full bg-gray-700 px-2 text-xs font-bold hover:bg-gray-700 
+              ${isFavorites && "color-white bg-primary"}`}
               onClick={handleFavoritesRestaurant}
             >
-              <HeartIcon size={12} className="fill-red-500" />
+              <HeartIcon
+                size={12}
+              />
             </Button>
           )}
         </div>
