@@ -104,13 +104,13 @@ const Header = () => {
                       <p>Meus Pedidos</p>
                     </Link>
                   </Button>
-                  <Button
-                    variant="ghost"
+                  <Link
                     className="flex w-full items-center justify-start gap-4 rounded-full px-2"
+                    href="/favorite-restaurants"
                   >
                     <Heart size={22} />
                     <p>Favoritos</p>
-                  </Button>
+                  </Link>
                 </nav>
               </>
             )}

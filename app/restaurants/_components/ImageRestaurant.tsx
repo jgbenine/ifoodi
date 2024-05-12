@@ -4,13 +4,21 @@ import { Restaurant } from "@prisma/client";
 import { ChevronLeft, HeartIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import useToggleFavoriteRestaurants from "@/app/_hooks/useToggleFavoriteRestaurants";
+import { useSession } from "next-auth/react";
 
 interface PropsRestaurant {
-  restaurant: Pick<Restaurant, "name" | "imageUrl">;
+  restaurant: Pick<Restaurant, "id" | "name" | "imageUrl">;
 }
 
 export const ImageRestaurant = ({ restaurant }: PropsRestaurant) => {
   const router = useRouter();
+  const {data} = useSession();
+  
+  const { handleFavoriteClick } = useToggleFavoriteRestaurants({
+    restaurantId: restaurant.id,
+    userId: data?.user.id,
+  });
 
   const handleBackClick = () => router.back();
   return (
@@ -32,7 +40,7 @@ export const ImageRestaurant = ({ restaurant }: PropsRestaurant) => {
         >
           <ChevronLeft size={18} />
         </Button>
-        <Button className="flex items-center gap-1 rounded-full bg-white px-2 text-xs font-bold" size="icon">
+        <Button className="flex items-center gap-1 rounded-full bg-white px-2 text-xs font-bold" size="icon" onClick={handleFavoriteClick}>
           <HeartIcon size={18} className="fill-red-500 text-red-500" />
         </Button>
       </div>
