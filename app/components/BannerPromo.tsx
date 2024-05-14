@@ -7,17 +7,16 @@ interface PropsBannerPromo  {
 
 export const BannerPromo = ({alt, src}: PropsBannerPromo) => {
   return (
-    <span>
+    <div className="mx-auto">
       <Image
         width={0}
         height={0}
         sizes="100vw"
-        className="h-auto w-full"
+        className="h-auto w-full rounded-lg"
         quality={100}
         alt={alt}
         src={src}
       />
-      
-    </span>
+    </div>
   );
 };

@@ -28,7 +28,7 @@ const Header = () => {
   }
 
   return (
-    <header className="flex items-center justify-between py-3 pb-5 pt-3">
+    <header className="flex items-center justify-between py-3 pb-5 pt-3 px-3 shadow-sm  border-b">
       <Link href="/">
         <Image
           src="/img/logo.png"
@@ -69,7 +69,7 @@ const Header = () => {
                     <p className="text-xs text-muted-foreground">
                       {data?.user?.email}
                     </p>
-                  </span>
+                  </span>\
                 </div>
               </div>
             ) : (

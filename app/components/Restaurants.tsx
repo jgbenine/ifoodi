@@ -12,7 +12,7 @@ export const Restaurants = async () => {
   });
 
   return (
-    <div className="flex gap-2 overflow-x-scroll px-3 [&::-webkit-scrollbar]:hidden">
+    <div className="flex gap-2 overflow-x-scroll [&::-webkit-scrollbar]:hidden">
       {restaurants.map((restaurants) => (
         <CardRestaurant
           key={restaurants.id}

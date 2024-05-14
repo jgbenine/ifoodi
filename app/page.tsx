@@ -28,47 +28,45 @@ export default async function Home() {
 
   return (
     <>
-      <div className="px-3">
-        <Header />
+      <Header />
+      <section className="px-3">
         <div className="pt-4">
           <Search />
         </div>
         <Categories />
-        <BannerPromo src="/img/banner-1.png" alt="Descontos em pizzas" />
-      </div>
-      <div className="space-y-2 py-3">
+        <BannerPromo src="/img/banner-1.webp" alt="Descontos em pizzas" />
+        <div className="space-y-2 py-3">
+          <div className="flex items-center justify-between">
+            <h2 className="font-semibold">Mais Pedidos</h2>
+            <Button
+              variant="ghost"
+              className="h-fit px-3 hover:bg-transparent"
+              asChild
+            >
+              <Link href="/product/recommended">
+                Ver todos
+                <ChevronRightIcon size={16} />
+              </Link>
+            </Button>
+          </div>
+          <ProductsList products={products} />
+        </div>
+        <BannerPromo src="/img/banner-2.webp" alt="Brasileiras" />
         <div className="flex items-center justify-between">
-          <h2 className="px-3">Mais Pedidos</h2>
+          <h2 className="font-semibold">Restaurantes</h2>
           <Button
             variant="ghost"
             className="h-fit px-3 hover:bg-transparent"
             asChild
           >
-            <Link href="/product/recommended">
+            <Link href="/restaurants/recommended">
               Ver todos
               <ChevronRightIcon size={16} />
             </Link>
           </Button>
         </div>
-        <ProductsList products={products} />
-      </div>
-      <div className="p-3">
-        <BannerPromo src="/img/banner-2.png" alt="Descontos em Hamburgers" />
-      </div>
-      <div className="flex items-center justify-between">
-        <h2 className="px-3">Restaurantes</h2>
-        <Button
-          variant="ghost"
-          className="h-fit px-3 hover:bg-transparent"
-          asChild
-        >
-          <Link href="/restaurants/recommended">
-            Ver todos
-            <ChevronRightIcon size={16} />
-          </Link>
-        </Button>
-      </div>
-      <Restaurants />
+        <Restaurants />
+      </section>
     </>
   );
 }
