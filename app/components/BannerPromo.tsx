@@ -12,7 +12,7 @@ export const BannerPromo = ({alt, src}: PropsBannerPromo) => {
         width={0}
         height={0}
         sizes="100vw"
-        className="h-auto w-full rounded-lg"
+        className="h-auto max-h-[400px] w-full rounded-lg"
         quality={100}
         alt={alt}
         src={src}

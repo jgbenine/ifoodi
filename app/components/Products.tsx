@@ -1,7 +1,9 @@
-import React from 'react';
-import CardProduct from './CardProduct';
-import { Prisma } from '@prisma/client';
-
+"use client";
+import React from "react";
+import CardProduct from "./CardProduct";
+import { Prisma } from "@prisma/client";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
 
 interface PropsProductList {
   products: Prisma.ProductGetPayload<{
@@ -15,13 +17,26 @@ interface PropsProductList {
   }>[];
 }
 
-export const ProductsList = ({products}: PropsProductList) => {  
+export const ProductsList = ({ products }: PropsProductList) => {
   return (
-    <div className="flex gap-2 overflow-x-scroll [&::-webkit-scrollbar]:hidden">
-      {products.map((product)=> (
-        <CardProduct key={product.id} product={product} />
-      ))}
-    </div>
-  )
-}
-
+    <>
+      <Swiper className="flex" spaceBetween={10} freeMode={true}  breakpoints={{
+          420: {
+            slidesPerView: 2,
+          },
+          768: {
+            slidesPerView: 3,
+          },
+          1024: {
+            slidesPerView: 5,
+          },
+        }}>
+        {products.map((product) => (
+          <SwiperSlide key={product.id}>
+            <CardProduct product={product} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </>
+  );
+};
