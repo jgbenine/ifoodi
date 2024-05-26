@@ -6,7 +6,7 @@ const Categories = async () => {
 
   return (
     <>
-      <div className="flex flex-wrap gap-2 pb-5 pt-3">
+      <div className="flex flex-wrap gap-2 pb-5 pt-3 sm:grid grid-cols-3">
         {categories.map((category) => (
           <CardCategory key={category.id} category={category} />
         ))}

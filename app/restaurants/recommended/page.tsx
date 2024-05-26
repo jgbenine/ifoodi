@@ -22,7 +22,7 @@ const RestaurantsRecommended = async () => {
         <Header />
       </span>
       <h2 className="font-semibold mb-0.5">Restaurantes Abertos</h2>
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 sm:grid grid-cols-2 lg:grid-cols-4">
         {restaurants.map((restaurant) => (
           <CardRestaurant key={restaurant.id} restaurant={restaurant} userFavoritesRestaurants={userFavoriteRestaurants} />
         ))}

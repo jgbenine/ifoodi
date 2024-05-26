@@ -10,7 +10,7 @@ const ProductsRecommended = async () => {
         gt: 0,
       },
     },
-    take: 10,
+    take: 20,
     include: {
       restaurant: {
         select: {
@@ -25,7 +25,7 @@ const ProductsRecommended = async () => {
       <Header />
       <section className="px-6 py-5">
         <h2 className="mb-3 text-lg font-semibold">Mais recomendados</h2>
-        <div className="m-full flex flex-wrap gap-6">
+        <div className="w-full grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
           {products.map((product) => (
             <CardProduct product={product} key={product.name} />
           ))}

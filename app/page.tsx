@@ -26,6 +26,7 @@ export default async function Home() {
     },
   });
 
+
   return (
     <>
       <Header />
@@ -52,7 +53,7 @@ export default async function Home() {
           <ProductsList products={products} />
         </div>
         <BannerPromo src="/img/banner-2.webp" alt="Brasileiras" />
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between pt-3">
           <h2 className="font-semibold">Restaurantes</h2>
           <Button
             variant="ghost"

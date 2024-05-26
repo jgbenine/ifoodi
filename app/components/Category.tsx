@@ -8,7 +8,7 @@ interface PropsCategory {
 
 export const CardCategory = ({ category }: PropsCategory) => {
   return (
-    <Link href={`/categories/${category.id}/products`} className="flex items-center gap-3 bg-white px-3 py-3 rounded-2xl border border-gray-100 shadow-md">
+    <Link href={`/categories/${category.id}/products`} className="flex items-center justify-center gap-3 bg-white px-3 py-3 rounded-2xl border text-center w-auto border-gray-100 shadow-md sm:w-full">
       <Image
         src={category.imageUrl}
         alt={category.name}

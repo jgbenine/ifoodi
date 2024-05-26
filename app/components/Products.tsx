@@ -3,6 +3,7 @@ import React from "react";
 import CardProduct from "./CardProduct";
 import { Prisma } from "@prisma/client";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay} from 'swiper/modules';
 import "swiper/css";
 
 interface PropsProductList {
@@ -20,7 +21,11 @@ interface PropsProductList {
 export const ProductsList = ({ products }: PropsProductList) => {
   return (
     <>
-      <Swiper className="flex" spaceBetween={10} freeMode={true}  breakpoints={{
+      <Swiper className="flex" modules={[Autoplay]} loop={true} spaceBetween={10} freeMode={true}
+        autoplay={{
+          delay: 3000,
+        }}
+        breakpoints={{
           420: {
             slidesPerView: 2,
           },
